@@ -1,4 +1,4 @@
-""" __doc__ """
+"""Script to calculate median resolve time."""
 
 import csv
 from collections import namedtuple
@@ -8,15 +8,16 @@ INC_DCT = {}
 RESOLVE_TIMES_DCT = {}
 RESOLVE_TIMES = []
 
+
 def format_date(inc_datetime):
-    """ formats dates """
+    """Formats dates."""
     date_fmt = '%Y-%m-%d %H:%M:%S'
     inc_datetime = datetime.strptime(inc_datetime, date_fmt)
     return inc_datetime
 
 
 def open_csv(inc_file, dct):
-    """ open csv and populate a dictionary with its contents """
+    """Open csv and populate a dictionary with its contents."""
     with open(inc_file) as csv_file:
         f_csv = csv.reader(csv_file)
         column_headings = next(f_csv)
@@ -30,11 +31,11 @@ def open_csv(inc_file, dct):
 
 
 def output_median(a):
-    """ print median resolve time in minutes """
+    """Print median resolve time in minutes."""
     print(f"Median: {a} minutes")
 
 
-open_csv('incidents.csv', INC_DCT)
+open_csv("incidents.csv", INC_DCT)
 
 for inc_num, times in INC_DCT.items():
     if times[0] and times[1]:
@@ -48,7 +49,7 @@ for inc_num, times in INC_DCT.items():
     else:
         pass
 
-print(f'Number of incidents: {len(RESOLVE_TIMES)}')
+print(f"Number of incidents: {len(RESOLVE_TIMES)}")
 
 if len(RESOLVE_TIMES) % 2 == 0:
     NUM_TIMES = len(RESOLVE_TIMES)
